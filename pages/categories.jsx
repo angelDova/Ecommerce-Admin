@@ -243,7 +243,7 @@ function Categories({ swal }) {
   function editCategory(category) {
     setEditedCategory(category);
     setName(category.name);
-    setParentCategory(category.parent?.id);
+    setParentCategory(category.parent?._id);
 
     if (category.properties) {
       setProperties(
@@ -275,11 +275,13 @@ function Categories({ swal }) {
         }
       });
   }
+
   function addProperty() {
     setProperties((prev) => {
       return [...prev, { name: "", values: "" }];
     });
   }
+
   function handlePropertyNameChange(index, property, newName) {
     setProperties((prev) => {
       const properties = [...prev];
@@ -301,6 +303,7 @@ function Categories({ swal }) {
       });
     });
   }
+
   return (
     <Layout>
       <h1>Categories</h1>
@@ -309,6 +312,7 @@ function Categories({ swal }) {
           ? `Edit category ${editedCategory.name}`
           : "Create new category"}
       </label>
+
       <form onSubmit={saveCategory}>
         <div className="flex gap-1">
           <input
@@ -341,7 +345,10 @@ function Categories({ swal }) {
           </button>
           {properties.length > 0 &&
             properties.map((property, index) => (
-              <div key={property.name} className="flex gap-1 mb-2">
+              <div
+                key={`${property.name}-${index}`}
+                className="flex gap-1 mb-2"
+              >
                 <input
                   type="text"
                   value={property.name}
@@ -350,6 +357,7 @@ function Categories({ swal }) {
                     handlePropertyNameChange(index, property, ev.target.value)
                   }
                   placeholder="property name (example: color)"
+                  autoFocus
                 />
                 <input
                   type="text"
