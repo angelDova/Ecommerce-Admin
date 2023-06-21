@@ -6,7 +6,7 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter";
 const adminEmails = ["angelfcb001@gmail.com"];
 
 export const authOptions = {
-  // secret: process.env.SECRET,
+  secret: process.env.SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
@@ -33,6 +33,6 @@ export async function isAdminRequest(req, res) {
     res.status(401);
     res.end();
 
-    throw "access denied";
+    throw "Access Denied";
   }
 }

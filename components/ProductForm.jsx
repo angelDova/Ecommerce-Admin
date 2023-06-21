@@ -128,19 +128,21 @@ export default function ProductForm({
         <div className="">
           {propertiesToFill.length > 0 &&
             propertiesToFill.map((p) => (
-              <div key={p.name} className="flex gap-1">
-                {p.name}
-                <select
-                  onChange={(ev) => setProductProp(p.name, ev.target.value)}
-                  value={productProperties[p.name]}
-                  className=""
-                >
-                  {p.values.map((v) => (
-                    <option key={v} value={v} className="">
-                      {v}
-                    </option>
-                  ))}
-                </select>
+              <div key={p.name} className="">
+                <label className="">
+                  {p.name[0].toUpperCase() + p.name.substring(1)}
+                  <select
+                    onChange={(ev) => setProductProp(p.name, ev.target.value)}
+                    value={productProperties[p.name]}
+                    className=""
+                  >
+                    {p.values.map((v) => (
+                      <option key={v} value={v} className="">
+                        {v}
+                      </option>
+                    ))}
+                  </select>
+                </label>
               </div>
             ))}
         </div>
@@ -154,7 +156,10 @@ export default function ProductForm({
         >
           {!!images?.length &&
             images.map((link) => (
-              <div key={link} className="h-24">
+              <div
+                key={link}
+                className="h-24 bg-white p-4 shadow-md rounded-md border border-gray-200"
+              >
                 <img src={link} alt="" className="rounded-lg" />
               </div>
             ))}
@@ -164,7 +169,7 @@ export default function ProductForm({
             <Spinner />
           </div>
         )}
-        <label className="w-24 h-24 flex flex-col items-center justify-center text-sm gap-1 text-gray-500 rounded-lg bg-gray-200 cursor-pointer">
+        <label className="w-24 h-24 flex flex-col text-center items-center justify-center text-sm gap-1 text-primary rounded-md bg-white shadow-md border border-primary cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -179,7 +184,7 @@ export default function ProductForm({
               d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
             />
           </svg>
-          <div className="">Upload</div>
+          <div className="">Upload Image</div>
           {/* Code below allows users to upload a file from their computer */}
           <input type="file" onChange={uploadImages} className="hidden" />
         </label>

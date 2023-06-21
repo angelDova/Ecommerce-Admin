@@ -1,11 +1,11 @@
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Nav from "@/components/Nav";
 import Layout from "@/components/Layout";
 import Image from "next/image";
 
 export default function Home() {
   const { data: session } = useSession();
-  if (!session) return;
+  // if (!session) return;
   return (
     <Layout>
       <div className="text-blue-900 flex justify-between">
